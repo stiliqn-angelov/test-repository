@@ -11,5 +11,6 @@ namespace train_tickets_system.Models
         public int TrainId { get; set; }
         public int businessSeats { get; set; }
         public int econimicSeats { get; set; }
+        public virtual List<Trip> Trips { get; set; }
     }
 }

@@ -10,11 +10,16 @@ namespace train_tickets_system.Models
 {
     public  class Route
     {  
+        //public int RouteId { get; set; }
+        [Key]
         public int RouteId { get; set; }
-        public int IntialCityID { get; set; }
-        public int TargetCityID { get; set; }
-        public City InitialCity { get; set; }
-        public City TargetCity { get; set; }
+       /* public int InitialCityId { get; set; }
+        [ForeignKey("InitialCityId")]*/
+        public virtual City IntialCity { get; set; }
+       /* public int TargetCityId { get; set; }
+        [ForeignKey("TargetCityId")]*/
+        public virtual City TargetCity { get; set; }
         public float Value { get; set; }
+        public virtual List<Trip> Trips { get; set; }
     }
 }

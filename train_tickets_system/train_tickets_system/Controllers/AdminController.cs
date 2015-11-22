@@ -17,7 +17,7 @@ namespace train_tickets_system.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View(db.Schedules.ToList());
+            return View(db.Trips.ToList());
         }
 
         // GET: Admin/Details/5
@@ -27,12 +27,12 @@ namespace train_tickets_system.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Trip schedules = db.Schedules.Find(id);
-            if (schedules == null)
+            Trip Trips = db.Trips.Find(id);
+            if (Trips == null)
             {
                 return HttpNotFound();
             }
-            return View(schedules);
+            return View(Trips);
         }
 
         // GET: Admin/Create
@@ -46,16 +46,16 @@ namespace train_tickets_system.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,DepartureTime,ArrivalTime")] Trip schedules)
+        public ActionResult Create([Bind(Include = "ID,DepartureTime,ArrivalTime")] Trip Trips)
         {
             if (ModelState.IsValid)
             {
-                db.Schedules.Add(schedules);
+                db.Trips.Add(Trips);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(schedules);
+            return View(Trips);
         }
 
         // GET: Admin/Edit/5
@@ -65,12 +65,12 @@ namespace train_tickets_system.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Trip schedules = db.Schedules.Find(id);
-            if (schedules == null)
+            Trip Trips = db.Trips.Find(id);
+            if (Trips == null)
             {
                 return HttpNotFound();
             }
-            return View(schedules);
+            return View(Trips);
         }
 
         // POST: Admin/Edit/5
@@ -78,15 +78,15 @@ namespace train_tickets_system.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,DepartureTime,ArrivalTime")] Trip schedules)
+        public ActionResult Edit([Bind(Include = "ID,DepartureTime,ArrivalTime")] Trip Trips)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(schedules).State = EntityState.Modified;
+                db.Entry(Trips).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(schedules);
+            return View(Trips);
         }
 
         // GET: Admin/Delete/5
@@ -96,12 +96,12 @@ namespace train_tickets_system.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Trip schedules = db.Schedules.Find(id);
-            if (schedules == null)
+            Trip Trips = db.Trips.Find(id);
+            if (Trips == null)
             {
                 return HttpNotFound();
             }
-            return View(schedules);
+            return View(Trips);
         }
 
         // POST: Admin/Delete/5
@@ -109,8 +109,8 @@ namespace train_tickets_system.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Trip schedules = db.Schedules.Find(id);
-            db.Schedules.Remove(schedules);
+            Trip Trips = db.Trips.Find(id);
+            db.Trips.Remove(Trips);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
