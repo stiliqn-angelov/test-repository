@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace train_tickets_system.Models
 {
-    public class Cities
+    public class City
     {   
         
-        public int ID { get; set; }
+        public int CityId { get; set; }
         public string Name { get; set; }
     }
 }

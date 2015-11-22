@@ -27,7 +27,7 @@ namespace train_tickets_system.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Schedules schedules = db.Schedules.Find(id);
+            Trip schedules = db.Schedules.Find(id);
             if (schedules == null)
             {
                 return HttpNotFound();
@@ -46,7 +46,7 @@ namespace train_tickets_system.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,DepartureTime,ArrivalTime")] Schedules schedules)
+        public ActionResult Create([Bind(Include = "ID,DepartureTime,ArrivalTime")] Trip schedules)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace train_tickets_system.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Schedules schedules = db.Schedules.Find(id);
+            Trip schedules = db.Schedules.Find(id);
             if (schedules == null)
             {
                 return HttpNotFound();
@@ -78,7 +78,7 @@ namespace train_tickets_system.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,DepartureTime,ArrivalTime")] Schedules schedules)
+        public ActionResult Edit([Bind(Include = "ID,DepartureTime,ArrivalTime")] Trip schedules)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace train_tickets_system.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Schedules schedules = db.Schedules.Find(id);
+            Trip schedules = db.Schedules.Find(id);
             if (schedules == null)
             {
                 return HttpNotFound();
@@ -109,7 +109,7 @@ namespace train_tickets_system.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Schedules schedules = db.Schedules.Find(id);
+            Trip schedules = db.Schedules.Find(id);
             db.Schedules.Remove(schedules);
             db.SaveChanges();
             return RedirectToAction("Index");

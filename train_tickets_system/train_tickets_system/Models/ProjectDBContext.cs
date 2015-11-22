@@ -19,11 +19,11 @@ namespace train_tickets_system.Models
         {
         }
 
-        public System.Data.Entity.DbSet<train_tickets_system.Models.Schedules> Schedules { get; set; }
-        public System.Data.Entity.DbSet<train_tickets_system.Models.Trains> Trains { get; set; }
-        public System.Data.Entity.DbSet<train_tickets_system.Models.Reservations> Reservations { get; set; }
+        public System.Data.Entity.DbSet<train_tickets_system.Models.Trip> Schedules { get; set; }
+        public System.Data.Entity.DbSet<train_tickets_system.Models.Train> Trains { get; set; }
+        public System.Data.Entity.DbSet<train_tickets_system.Models.Reservation> Reservations { get; set; }
         public System.Data.Entity.DbSet<train_tickets_system.Models.Price> Price { get; set; }
-        public System.Data.Entity.DbSet<train_tickets_system.Models.Distances> Distances { get; set; }
-        public System.Data.Entity.DbSet<train_tickets_system.Models.Cities> Cities { get; set; }
+        public System.Data.Entity.DbSet<train_tickets_system.Models.Route> Distances { get; set; }
+        public System.Data.Entity.DbSet<train_tickets_system.Models.City> Cities { get; set; }
     }
 }

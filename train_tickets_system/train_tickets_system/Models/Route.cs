@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace train_tickets_system.Models
 {
-    public  class Distances
+    public  class Route
     {  
-        public int ID { get; set; }
-        public List<Cities> InitialCityID { get; set; }
-        public List<Cities> TargetCityID { get; set; }
+        public int RouteId { get; set; }
+        public int IntialCityID { get; set; }
+        public int TargetCityID { get; set; }
+        public City InitialCity { get; set; }
+        public City TargetCity { get; set; }
         public float Value { get; set; }
     }
 }
