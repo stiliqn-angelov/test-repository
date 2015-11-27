@@ -1,22 +1,12 @@
-namespace train_tickets_system.Migrations
+namespace train_tickets_system.LoginMigrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class third : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
-            DropForeignKey("dbo.Reservations", "TripRefId", "dbo.Trips");
-            DropForeignKey("dbo.Routes", "IntialCity_CityId", "dbo.Cities");
-            DropForeignKey("dbo.Routes", "TargetCity_CityId", "dbo.Cities");
-            DropForeignKey("dbo.Trips", "RouteRefId", "dbo.Routes");
-            DropForeignKey("dbo.Trips", "TrainRefId", "dbo.Trains");
-            DropIndex("dbo.Reservations", new[] { "TripRefId" });
-            DropIndex("dbo.Trips", new[] { "TrainRefId" });
-            DropIndex("dbo.Trips", new[] { "RouteRefId" });
-            DropIndex("dbo.Routes", new[] { "IntialCity_CityId" });
-            DropIndex("dbo.Routes", new[] { "TargetCity_CityId" });
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -85,78 +75,10 @@ namespace train_tickets_system.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
-            DropTable("dbo.Cities");
-            DropTable("dbo.Prices");
-            DropTable("dbo.Reservations");
-            DropTable("dbo.Trips");
-            DropTable("dbo.Routes");
-            DropTable("dbo.Trains");
         }
         
         public override void Down()
         {
-            CreateTable(
-                "dbo.Trains",
-                c => new
-                    {
-                        TrainId = c.Int(nullable: false, identity: true),
-                        businessSeats = c.Int(nullable: false),
-                        econimicSeats = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.TrainId);
-            
-            CreateTable(
-                "dbo.Routes",
-                c => new
-                    {
-                        RouteId = c.Int(nullable: false, identity: true),
-                        Value = c.Single(nullable: false),
-                        IntialCity_CityId = c.Int(),
-                        TargetCity_CityId = c.Int(),
-                    })
-                .PrimaryKey(t => t.RouteId);
-            
-            CreateTable(
-                "dbo.Trips",
-                c => new
-                    {
-                        TripId = c.Int(nullable: false, identity: true),
-                        TrainRefId = c.Int(nullable: false),
-                        RouteRefId = c.Int(nullable: false),
-                        DepartureTime = c.DateTime(nullable: false),
-                        ArrivalTime = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.TripId);
-            
-            CreateTable(
-                "dbo.Reservations",
-                c => new
-                    {
-                        ReservationId = c.Int(nullable: false, identity: true),
-                        Customer_ID = c.Int(nullable: false),
-                        TripRefId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.ReservationId);
-            
-            CreateTable(
-                "dbo.Prices",
-                c => new
-                    {
-                        PriceId = c.Int(nullable: false, identity: true),
-                        name = c.String(),
-                        Value = c.Single(nullable: false),
-                    })
-                .PrimaryKey(t => t.PriceId);
-            
-            CreateTable(
-                "dbo.Cities",
-                c => new
-                    {
-                        CityId = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.CityId);
-            
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
@@ -172,16 +94,6 @@ namespace train_tickets_system.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            CreateIndex("dbo.Routes", "TargetCity_CityId");
-            CreateIndex("dbo.Routes", "IntialCity_CityId");
-            CreateIndex("dbo.Trips", "RouteRefId");
-            CreateIndex("dbo.Trips", "TrainRefId");
-            CreateIndex("dbo.Reservations", "TripRefId");
-            AddForeignKey("dbo.Trips", "TrainRefId", "dbo.Trains", "TrainId", cascadeDelete: true);
-            AddForeignKey("dbo.Trips", "RouteRefId", "dbo.Routes", "RouteId", cascadeDelete: true);
-            AddForeignKey("dbo.Routes", "TargetCity_CityId", "dbo.Cities", "CityId");
-            AddForeignKey("dbo.Routes", "IntialCity_CityId", "dbo.Cities", "CityId");
-            AddForeignKey("dbo.Reservations", "TripRefId", "dbo.Trips", "TripId", cascadeDelete: true);
         }
     }
 }

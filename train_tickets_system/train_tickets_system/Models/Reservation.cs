@@ -9,8 +9,11 @@ namespace train_tickets_system.Models
 {
     public class Reservation
     {
+        public Reservation() { }
         public int ReservationId { get; set; }
-        public int Customer_ID { get; set; }
+        public String CustomerID { get; set; }
+        [ForeignKey("CustomerID")]
+        public ApplicationUser User { get; set; }
         public int TripRefId { get; set; }
         [ForeignKey("TripRefId")]
         public virtual Trip Trip { get; set; }

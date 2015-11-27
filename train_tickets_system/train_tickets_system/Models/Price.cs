@@ -8,8 +8,16 @@ namespace train_tickets_system.Models
 {
     public class Price
     {
+        public Price() { }
+        public Price(int id,string name,decimal value)
+        {
+            PriceId = id;
+            this.Name = name;
+            this.Value = value;
+        }
         public int PriceId { get; set; }
-        public String name { get; set; }
-        public float Value { get; set; }
+        public String Name { get; set; }
+        public decimal Value { get; set; }
+        
     }
 }

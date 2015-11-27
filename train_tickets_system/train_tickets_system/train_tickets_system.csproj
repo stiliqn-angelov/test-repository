@@ -171,22 +171,23 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DatabaseMigrations\201511250220556_Initial.cs" />
+    <Compile Include="DatabaseMigrations\201511250220556_Initial.Designer.cs">
+      <DependentUpon>201511250220556_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseMigrations\201511252241441_NewSeed.cs" />
+    <Compile Include="DatabaseMigrations\201511252241441_NewSeed.Designer.cs">
+      <DependentUpon>201511252241441_NewSeed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511222028280_Inital.cs" />
-    <Compile Include="Migrations\201511222028280_Inital.Designer.cs">
-      <DependentUpon>201511222028280_Inital.cs</DependentUpon>
+    <Compile Include="LoginMigrations\201511250220085_Initial.cs" />
+    <Compile Include="LoginMigrations\201511250220085_Initial.Designer.cs">
+      <DependentUpon>201511250220085_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511222103097_second.cs" />
-    <Compile Include="Migrations\201511222103097_second.Designer.cs">
-      <DependentUpon>201511222103097_second.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511230244257_third.cs" />
-    <Compile Include="Migrations\201511230244257_third.Designer.cs">
-      <DependentUpon>201511230244257_third.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="LoginMigrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Route.cs" />
@@ -273,14 +274,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511222028280_Inital.resx">
-      <DependentUpon>201511222028280_Inital.cs</DependentUpon>
+    <EmbeddedResource Include="DatabaseMigrations\201511250220556_Initial.resx">
+      <DependentUpon>201511250220556_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511222103097_second.resx">
-      <DependentUpon>201511222103097_second.cs</DependentUpon>
+    <EmbeddedResource Include="DatabaseMigrations\201511252241441_NewSeed.resx">
+      <DependentUpon>201511252241441_NewSeed.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511230244257_third.resx">
-      <DependentUpon>201511230244257_third.cs</DependentUpon>
+    <EmbeddedResource Include="LoginMigrations\201511250220085_Initial.resx">
+      <DependentUpon>201511250220085_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

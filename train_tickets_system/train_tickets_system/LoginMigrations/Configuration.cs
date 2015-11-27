@@ -1,4 +1,4 @@
-namespace train_tickets_system.Migrations
+namespace train_tickets_system.LoginMigrations
 {
     using System;
     using System.Data.Entity;
@@ -10,6 +10,7 @@ namespace train_tickets_system.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            MigrationsDirectory = @"LoginMigrations";
         }
 
         protected override void Seed(train_tickets_system.Models.ApplicationDbContext context)
@@ -26,6 +27,7 @@ namespace train_tickets_system.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            
         }
     }
 }

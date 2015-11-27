@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 namespace train_tickets_system.Models
 {
     public class City
-    {   
-        
+    {
+        public City() { }
+        public City(int id,string name)
+        {
+            CityId = id;
+            this.Name = name;
+        }
         public int CityId { get; set; }
         public string Name { get; set; }
 

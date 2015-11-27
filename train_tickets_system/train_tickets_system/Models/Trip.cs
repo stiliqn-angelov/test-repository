@@ -7,8 +7,17 @@ using System.Threading.Tasks;
 
 namespace train_tickets_system.Models
 {
-    public  class Trip
+    public class Trip
     {
+        public Trip() { }
+        public Trip(int id,int trainid,int routeid, DateTime departuretime,DateTime arrivaltime)
+        {
+            TripId = id;
+            TrainRefId = trainid;
+            RouteRefId = routeid;
+            this.DepartureTime = departuretime;
+            this.ArrivalTime = arrivaltime;
+        }
         public int TripId { get; set; }
         public int TrainRefId { get; set; }
         [ForeignKey("TrainRefId")]
