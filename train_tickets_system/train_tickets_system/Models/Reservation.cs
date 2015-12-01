@@ -15,10 +15,10 @@ namespace train_tickets_system.Models
         public String CustomerID { get; set; }
         [ForeignKey("CustomerID")]
         public ApplicationUser User { get; set; }
-       
+        public int Seats { get; set; }
         public int TripRefId { get; set; }
         [ForeignKey("TripRefId")]
         public virtual Trip Trip { get; set; }
-        //We need a system for calculating travel routes
+       
     }
 }

@@ -182,6 +182,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Price.cs" />
     <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\SeatsTaken.cs" />
     <Compile Include="Models\Trip.cs" />
     <Compile Include="Models\Train.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

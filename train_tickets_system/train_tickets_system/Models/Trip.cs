@@ -28,5 +28,6 @@ namespace train_tickets_system.Models
         public DateTime DepartureTime { get; set; }
         public DateTime ArrivalTime { get; set; }
         public virtual List<Reservation> Reservations { get; set; }
+        public SeatsTaken SeatsTaken { get; set; }
     }
 }
