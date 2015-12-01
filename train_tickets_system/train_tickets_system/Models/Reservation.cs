@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace train_tickets_system.Models
 {
     public class Reservation
@@ -14,6 +15,7 @@ namespace train_tickets_system.Models
         public String CustomerID { get; set; }
         [ForeignKey("CustomerID")]
         public ApplicationUser User { get; set; }
+       
         public int TripRefId { get; set; }
         [ForeignKey("TripRefId")]
         public virtual Trip Trip { get; set; }

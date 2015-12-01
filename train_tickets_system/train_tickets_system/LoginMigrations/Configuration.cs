@@ -27,7 +27,6 @@ namespace train_tickets_system.LoginMigrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            
         }
     }
 }

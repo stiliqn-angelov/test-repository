@@ -12,7 +12,7 @@ namespace train_tickets_system.Controllers
 {
     public class AdminController : Controller
     {
-        private ProjectDBContext db = new ProjectDBContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin
         public ActionResult Index()
