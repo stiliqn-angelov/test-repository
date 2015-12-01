@@ -13,7 +13,7 @@ namespace train_tickets_system.Models
         [Key, ForeignKey("Trip")]
         public int TrainId { get; set; }
         public int Value { get; set; }
-        public Train Train { get; set; }
+        public Trip Trip { get; set; }
 
     }
 }
