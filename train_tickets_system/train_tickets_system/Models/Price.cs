@@ -16,7 +16,7 @@ namespace train_tickets_system.Models
             this.Value = value;
         }
         public int PriceId { get; set; }
-        public String Name { get; set; }
+        public string Name { get; set; }
         public decimal Value { get; set; }
         
     }

@@ -12,7 +12,7 @@ namespace train_tickets_system.Models
     {
         public Reservation() { }
         public int ReservationId { get; set; }
-        public String CustomerID { get; set; }
+        public string CustomerID { get; set; }
         [ForeignKey("CustomerID")]
         public ApplicationUser User { get; set; }
         public int Seats { get; set; }
