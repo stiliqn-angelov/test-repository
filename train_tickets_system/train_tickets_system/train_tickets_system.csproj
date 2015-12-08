@@ -171,6 +171,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="DatabaseMigrations\201512021646408_Initial.cs" />
     <Compile Include="DatabaseMigrations\201512021646408_Initial.Designer.cs">
       <DependentUpon>201512021646408_Initial.cs</DependentUpon>
@@ -178,6 +179,10 @@
     <Compile Include="DatabaseMigrations\201512070304051_reservationsAndStuff.cs" />
     <Compile Include="DatabaseMigrations\201512070304051_reservationsAndStuff.Designer.cs">
       <DependentUpon>201512070304051_reservationsAndStuff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseMigrations\201512080349539_mergeTry.cs" />
+    <Compile Include="DatabaseMigrations\201512080349539_mergeTry.Designer.cs">
+      <DependentUpon>201512080349539_mergeTry.cs</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -195,6 +200,8 @@
     <Compile Include="Models\Train.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="View Models\SearchResultViewModel.cs" />
+    <Compile Include="View Models\SearchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -261,6 +268,9 @@
     <Content Include="Views\Manage\DeleteReservation.cshtml" />
     <Content Include="Views\Manage\SendConfirmation.cshtml" />
     <Content Include="Views\Manage\CheckConfirmation.cshtml" />
+    <Content Include="Views\Ticket\Search.cshtml" />
+    <Content Include="Views\Ticket\Book.cshtml" />
+    <Content Include="Views\Ticket\SearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -279,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DatabaseMigrations\201512070304051_reservationsAndStuff.resx">
       <DependentUpon>201512070304051_reservationsAndStuff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseMigrations\201512080349539_mergeTry.resx">
+      <DependentUpon>201512080349539_mergeTry.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

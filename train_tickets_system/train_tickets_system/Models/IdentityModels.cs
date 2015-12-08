@@ -48,6 +48,7 @@ namespace train_tickets_system.Models
         public System.Data.Entity.DbSet<train_tickets_system.Models.Price> Price { get; set; }
         public System.Data.Entity.DbSet<train_tickets_system.Models.Route> Routes { get; set; }
         public System.Data.Entity.DbSet<train_tickets_system.Models.City> Cities { get; set; }
+        public System.Data.Entity.DbSet<train_tickets_system.Models.SeatsTaken> SeatsTaken { get; set; }
 
         internal object Entry(object reservations)
         {

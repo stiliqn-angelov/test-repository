@@ -129,7 +129,7 @@ namespace train_tickets_system.Migrations
                                 routeFilteredTrips = tripsList.FindAll(x => x.RouteRefId == filteredRoute.RouteId);
                                 for (int o = 0; o < routeFilteredTrips.Count; o++)
                                 {
-                                    if ((routeFilteredTrips[o].DepartureTime < (timeCounter.AddHours(filteredRoute.Value/trainsList[s].AverageSpeed))&& timeCounter< routeFilteredTrips[o].ArrivalTime))//||timeCounter== routeFilteredTrips[o].DepartureTime)//(routeFilteredTrips[o].DepartureTime < timeCounter && routeFilteredTrips[o].ArrivalTime > timeCounter)/*|| routeFilteredTrips[o].DepartureTime == timeCounter*/)
+                                    if ((routeFilteredTrips[o].DepartureTime < (timeCounter.AddHours(filteredRoute.Value/trainsList[s].AverageSpeed))&& timeCounter< routeFilteredTrips[o].ArrivalTime))
                                     {
                                         possibleRoutes.Remove(routeFilteredTrips[o].RouteRefId);
                                     }

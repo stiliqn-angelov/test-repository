@@ -87,14 +87,14 @@ namespace train_tickets_system.Migrations
                 "dbo.Trains",
                 c => new
                     {
-                        TrainId = c.Int(nullable: false, identity: true),
+                        TripId = c.Int(nullable: false, identity: true),
                         businessSeats = c.Int(nullable: false),
                         econimicSeats = c.Int(nullable: false),
                         businessSeatsTaken = c.Int(nullable: false),
                         econimicSeatsTaken = c.Int(nullable: false),
                         AverageSpeed = c.Single(nullable: false),
                     })
-                .PrimaryKey(t => t.TrainId);
+                .PrimaryKey(t => t.TripId);
             
             CreateTable(
                 "dbo.AspNetUsers",

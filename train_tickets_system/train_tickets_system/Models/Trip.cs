@@ -10,10 +10,10 @@ namespace train_tickets_system.Models
     public class Trip
     {
         public Trip() { }
-        public Trip(int id,int trainid,int routeid, DateTime departuretime,DateTime arrivaltime)
+        public Trip(int id,int TrainId,int routeid, DateTime departuretime,DateTime arrivaltime)
         {
             TripId = id;
-            TrainRefId = trainid;
+            TrainRefId = TrainId;
             RouteRefId = routeid;
             this.DepartureTime = departuretime;
             this.ArrivalTime = arrivaltime;
