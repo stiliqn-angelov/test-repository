@@ -30,7 +30,8 @@ namespace train_tickets_system.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-
+          /*  if (System.Diagnostics.Debugger.IsAttached == false)
+                System.Diagnostics.Debugger.Launch();*/
             List<City> citiesList = new List<City>();
             citiesList.Clear();
             citiesList.Add(new City(1, "Brussels"));
@@ -90,7 +91,7 @@ namespace train_tickets_system.Migrations
                 new Models.Price(1, "economic", 0.11m),
                 new Models.Price(2, "business", 0.16m));
 
-            timeCounter = new DateTime(2015, 11, 25, 0, 0, 0);
+            timeCounter = new DateTime(2015, 12, 10, 0, 0, 0);
             //List<Models.City> nontargetList = new List<Models.City>();
             Models.City cityBuffer = new Models.City();
             DateTime resetter = new DateTime();
@@ -103,9 +104,8 @@ namespace train_tickets_system.Migrations
             cityFilteredRoutes.Clear();
             List<int> possibleRoutes = new List<int>();
             possibleRoutes.Clear();
-            /*List<int> impossibleRoutes = new List<int>();
-            impossibleRoutes.Clear();*/
-            for(int dayz=0;dayz<90;dayz++)
+         
+            for(int dayz=0;dayz<2;dayz++)
             { 
                 for (int s = 0; s < trainsList.Count; s++)
                 {
@@ -116,20 +116,20 @@ namespace train_tickets_system.Migrations
                         {
                             tripsList.Add(new Models.Trip(1, s + 1, s + 1, timeCounter, timeCounter.AddHours(routesList[s].Value / trainsList[s].AverageSpeed)));
                             cityBuffer = routesList[s].TargetCity;
-                            timeCounter = timeCounter.AddHours((routesList[s].Value / trainsList[s].AverageSpeed) + 0.5);
+                            timeCounter = timeCounter.AddHours((routesList[s].Value / trainsList[s].AverageSpeed) + 3);
                         }
                         else
                         {
 
-                            //filter routes then filter trips acordingly with a for if need
-                            cityFilteredRoutes = routesList.FindAll(x => x.IntialCity == cityBuffer);
+                           
+                            cityFilteredRoutes = routesList.FindAll(x => x.InitialCity == cityBuffer);
                             foreach (Models.Route filteredRoute in cityFilteredRoutes)
                             {
                                 possibleRoutes.Add(filteredRoute.RouteId);
                                 routeFilteredTrips = tripsList.FindAll(x => x.RouteRefId == filteredRoute.RouteId);
                                 for (int o = 0; o < routeFilteredTrips.Count; o++)
                                 {
-                                    if (routeFilteredTrips[o].DepartureTime.Hour < timeCounter.Hour && routeFilteredTrips[o].ArrivalTime.Hour > timeCounter.Hour)
+                                    if ((routeFilteredTrips[o].DepartureTime < (timeCounter.AddHours(filteredRoute.Value/trainsList[s].AverageSpeed))&& timeCounter< routeFilteredTrips[o].ArrivalTime))//||timeCounter== routeFilteredTrips[o].DepartureTime)//(routeFilteredTrips[o].DepartureTime < timeCounter && routeFilteredTrips[o].ArrivalTime > timeCounter)/*|| routeFilteredTrips[o].DepartureTime == timeCounter*/)
                                     {
                                         possibleRoutes.Remove(routeFilteredTrips[o].RouteRefId);
                                     }
@@ -140,7 +140,7 @@ namespace train_tickets_system.Migrations
                             {
                                 tripsList.Add(new Models.Trip(tripsList.Last().TripId + 1, s + 1, possibleRoutes.First(), timeCounter, timeCounter.AddHours(routesList[possibleRoutes.First() - 1].Value / trainsList[s].AverageSpeed)));
                                 cityBuffer = routesList[possibleRoutes.First() - 1].TargetCity;
-                                timeCounter = timeCounter.AddHours((routesList[possibleRoutes.First() - 1].Value / trainsList[s].AverageSpeed) + 0.5);
+                                timeCounter = timeCounter.AddHours((routesList[possibleRoutes.First() - 1].Value / trainsList[s].AverageSpeed) + 3);
                                 possibleRoutes.Remove(possibleRoutes.First());
                             }
                             else
@@ -149,7 +149,7 @@ namespace train_tickets_system.Migrations
                             }
                         }
                     }
-                    while (timeCounter.Date == resetter.Date);
+                    while (timeCounter.Day == resetter.Day);
                     timeCounter = resetter;
                 }
                 

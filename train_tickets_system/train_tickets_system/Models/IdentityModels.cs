@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
+using System;
 
 namespace train_tickets_system.Models
 {
@@ -16,16 +17,19 @@ namespace train_tickets_system.Models
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
-            
+
+           
             return userIdentity;
         }
         
         
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public int freeKilometers { get; set; }
+        public DateTime lastPromotionCheck { get; set; }
         public List<Reservation> Reservation { get; set; }
     } 
-
+    
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -44,15 +48,20 @@ namespace train_tickets_system.Models
         public System.Data.Entity.DbSet<train_tickets_system.Models.Price> Price { get; set; }
         public System.Data.Entity.DbSet<train_tickets_system.Models.Route> Routes { get; set; }
         public System.Data.Entity.DbSet<train_tickets_system.Models.City> Cities { get; set; }
-        /*protected override void OnModelCreating(DbModelBuilder modelBuilder)
+
+        internal object Entry(object reservations)
         {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<IdentityUser>().ToTable("Users").HasKey(p=>p.Id);
-            modelBuilder.Entity<ApplicationUser>().ToTable("Users").HasKey(p => p.Id);
-            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles").HasKey(p => p.RoleId);
-            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins").HasKey(p => p.UserId);
-            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
-            modelBuilder.Entity<IdentityRole>().ToTable("Roles");
-        }*/
+            throw new NotImplementedException();
+        }
+        /*protected override void OnModelCreating(DbModelBuilder modelBuilder)
+{
+   base.OnModelCreating(modelBuilder);
+   modelBuilder.Entity<IdentityUser>().ToTable("Users").HasKey(p=>p.Id);
+   modelBuilder.Entity<ApplicationUser>().ToTable("Users").HasKey(p => p.Id);
+   modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles").HasKey(p => p.RoleId);
+   modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins").HasKey(p => p.UserId);
+   modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
+   modelBuilder.Entity<IdentityRole>().ToTable("Roles");
+}*/
     }
 }

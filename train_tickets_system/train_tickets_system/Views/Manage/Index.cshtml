@@ -1,13 +1,13 @@
 ﻿@model train_tickets_system.Models.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "User Control Panel";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Change your account settings</h4>
+ 
     <hr />
     <dl class="dl-horizontal">
         <dt>Password:</dt>
@@ -23,62 +23,61 @@
             }
             ]
         </dd>
-        <dt>External Logins:</dt>
-        <dd>
-            @Model.Logins.Count [
-            @Html.ActionLink("Manage", "ManageLogins") ]
-        </dd>
-        @*
-            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-             
-             See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-             
-             Uncomment the following block after you have set up two-factor authentication
-        *@
-        @*  
-            <dt>Phone Number:</dt>
-            <dd>
-                @(Model.PhoneNumber ?? "None") [
-                @if (Model.PhoneNumber != null)
-                {
-                    @Html.ActionLink("Change", "AddPhoneNumber")
-                    @: &nbsp;|&nbsp;
-                    @Html.ActionLink("Remove", "RemovePhoneNumber")
-                }
-                else
-                {
-                    @Html.ActionLink("Add", "AddPhoneNumber")
-                }
-                ]
-            </dd>
-        *@
-        <dt>Two-Factor Authentication:</dt>
-        <dd>
-            <p>
-                There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication.
-            </p>
-            @*@if (Model.TwoFactor)
-                {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        <dt>Booked tickets:</dt>
+ 
+        @if (Model.BookedTrips.Count != 0)
+        {
+        <table class="table">
+            @foreach (var item in Model.BookedTrips)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TripId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TrainRefId)
+                    </td>
+                    @foreach (var seat in Model.userReservations)
                     {
-                        @Html.AntiForgeryToken()
-                        <text>Enabled
-                        <input type="submit" value="Disable" class="btn btn-link" />
-                        </text>
+                        if (seat.TripRefId == item.TripId)
+                        {
+                            <td>@seat.Seats</td>
+                        }
                     }
-                }
-                else
-                {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Disabled
-                        <input type="submit" value="Enable" class="btn btn-link" />
-                        </text>
-                    }
-                }*@
-        </dd>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Route.InitialCity.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Route.TargetCity.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartureTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ArrivalTime)
+                    </td>
+                    <td>
+                         @foreach (var seat in Model.userReservations)
+                         {
+                             if (seat.TripRefId == item.TripId)
+                             {
+                                @Html.ActionLink("Cancel Reservation", "DeleteReservation", new { id = seat.ReservationId })
+                                @Html.ActionLink("Resend Confirmation", "SendConfirmation", new { id = seat.ReservationId })
+                             }
+                         }
+                    </td>
+                </tr>
+            }
+        </table>
+        }
+
+        else
+        {
+            <dd>@Html.Raw("You don't have any booked tickets.")</dd>
+        }
+
     </dl>
+
+      @*</dd>
+    </dl>*@
 </div>

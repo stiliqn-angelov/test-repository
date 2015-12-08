@@ -12,8 +12,23 @@ namespace train_tickets_system.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public List<Trip> BookedTrips { get; set; }
+        public List<Reservation> userReservations { get; set; }
     }
+    public class SendConfirmationViewModel
+    {
+        public bool Confirmed { get; set; }
+    }
+    public class CheckConfirmationViewModel
+    {
+        public bool Success { get; set; } = false;
 
+    }
+    public class DeleteViewModel
+    {
+        public Reservation userReservation { get; set; }
+        public Trip reservationTrip { get; set; }
+    }
     public class ManageLoginsViewModel
     {
         public IList<UserLoginInfo> CurrentLogins { get; set; }

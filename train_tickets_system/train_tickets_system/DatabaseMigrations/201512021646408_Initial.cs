@@ -63,25 +63,25 @@ namespace train_tickets_system.Migrations
                     {
                         RouteId = c.Int(nullable: false, identity: true),
                         Value = c.Single(nullable: false),
-                        IntialCity_CityId = c.Int(),
+                        InitialCity_CityId = c.Int(),
                         TargetCity_CityId = c.Int(),
                     })
                 .PrimaryKey(t => t.RouteId)
-                .ForeignKey("dbo.Cities", t => t.IntialCity_CityId)
+                .ForeignKey("dbo.Cities", t => t.InitialCity_CityId)
                 .ForeignKey("dbo.Cities", t => t.TargetCity_CityId)
-                .Index(t => t.IntialCity_CityId)
+                .Index(t => t.InitialCity_CityId)
                 .Index(t => t.TargetCity_CityId);
             
             CreateTable(
                 "dbo.SeatsTakens",
                 c => new
                     {
-                        TrainId = c.Int(nullable: false),
+                        TripId = c.Int(nullable: false),
                         Value = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.TrainId)
-                .ForeignKey("dbo.Trips", t => t.TrainId)
-                .Index(t => t.TrainId);
+                .PrimaryKey(t => t.TripId)
+                .ForeignKey("dbo.Trips", t => t.TripId)
+                .Index(t => t.TripId);
             
             CreateTable(
                 "dbo.Trains",
@@ -176,10 +176,10 @@ namespace train_tickets_system.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Trips", "TrainRefId", "dbo.Trains");
-            DropForeignKey("dbo.SeatsTakens", "TrainId", "dbo.Trips");
+            DropForeignKey("dbo.SeatsTakens", "TripId", "dbo.Trips");
             DropForeignKey("dbo.Trips", "RouteRefId", "dbo.Routes");
             DropForeignKey("dbo.Routes", "TargetCity_CityId", "dbo.Cities");
-            DropForeignKey("dbo.Routes", "IntialCity_CityId", "dbo.Cities");
+            DropForeignKey("dbo.Routes", "InitialCity_CityId", "dbo.Cities");
             DropForeignKey("dbo.Reservations", "TripRefId", "dbo.Trips");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
@@ -187,9 +187,9 @@ namespace train_tickets_system.Migrations
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.SeatsTakens", new[] { "TrainId" });
+            DropIndex("dbo.SeatsTakens", new[] { "TripId" });
             DropIndex("dbo.Routes", new[] { "TargetCity_CityId" });
-            DropIndex("dbo.Routes", new[] { "IntialCity_CityId" });
+            DropIndex("dbo.Routes", new[] { "InitialCity_CityId" });
             DropIndex("dbo.Trips", new[] { "RouteRefId" });
             DropIndex("dbo.Trips", new[] { "TrainRefId" });
             DropIndex("dbo.Reservations", new[] { "TripRefId" });

@@ -7,12 +7,18 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using train_tickets_system.Models;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Mail;
+using System.Security.Claims;
 
 namespace train_tickets_system.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -64,17 +70,121 @@ namespace train_tickets_system.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            
+            List<Trip> ReservedTrips = new List<Trip>();
+            List<Reservation> TripSeatsReservation = new List<Reservation>();
+            foreach(Reservation userReservation in db.Reservations.ToList().FindAll(x => x.CustomerID == userId))
+            {
+                ReservedTrips.Add(db.Trips.ToList().Find(x => x.TripId == userReservation.TripRefId));
+                TripSeatsReservation.Add(userReservation);
+            }
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                BookedTrips = ReservedTrips,
+                userReservations = TripSeatsReservation
             };
             return View(model);
         }
 
+        public ActionResult DeleteReservation(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var model = new DeleteViewModel
+            {
+                userReservation = db.Reservations.Find(id),
+                reservationTrip = db.Trips.Find(db.Reservations.Find(id).TripRefId)
+            };
+           
+            if (model.userReservation == null)
+            {
+                return HttpNotFound();
+            }
+            return View(model);
+        }
+
+        [HttpPost, ActionName("DeleteReservation")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Reservation res = db.Reservations.Find(id);
+            db.Reservations.Remove(res);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public void calculatePrice ()
+        {
+            var curUser = db.Users.Find(User.Identity.GetUserId());
+            float sum=0;
+            foreach(var reservation in db.Reservations.ToList().FindAll(x=>x.CustomerID == User.Identity.GetUserId()))
+            {
+                if (reservation.Trip.DepartureTime < DateTime.Now&& reservation.Trip.DepartureTime>= curUser.lastPromotionCheck)
+                {
+                    sum += reservation.Trip.Route.Value;
+                }
+                
+            }
+            int generatedKilometers = (int)Math.Floor(sum / 3000);
+            curUser.freeKilometers = generatedKilometers;
+            curUser.lastPromotionCheck = DateTime.Now;
+            db.SaveChanges();
+        }
+
+    public ActionResult SendConfirmation (int id)
+        {
+            var model = new SendConfirmationViewModel
+            {
+                Confirmed = db.Reservations.Find(id).Confirmed
+            };
+            if (!db.Reservations.Find(id).Confirmed)
+            {
+                var confirmToken = UserManager.GenerateUserToken("reservation confirmation", User.Identity.GetUserId());
+                confirmToken = confirmToken.Replace("+", "j");
+                var smtpClient = new SmtpClient();
+                var msg = new MailMessage();
+                msg.To.Add(db.Users.Find(User.Identity.GetUserId()).Email);
+                msg.Subject = "Confirmation email";
+                var fullUrl = this.Url.Action("CheckConfirmation", "Manage", new { token = confirmToken }, this.Request.Url.Scheme);
+                //local host shouldn't be adressed like that
+                msg.Body =  "Click on the link to confirm your ticket.<br> <a href=" + fullUrl + " >LINK</a>";
+                msg.IsBodyHtml = true;
+                smtpClient.Send(msg);
+                
+                var myClaim = new Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim();
+                myClaim.ClaimType = id.ToString();
+                myClaim.ClaimValue = confirmToken;
+                myClaim.UserId = User.Identity.GetUserId();
+                db.Users.Find(User.Identity.GetUserId()).Claims.Add(myClaim);
+                db.SaveChanges();
+            }
+            
+            return View(model);
+        }
+        //
+        public ActionResult CheckConfirmation (string token)
+        {
+            var model = new CheckConfirmationViewModel();
+            var tokenCheck = db.Users.Find(User.Identity.GetUserId()).Claims.Last();
+            if (tokenCheck.ClaimValue == token)
+            {
+                model.Success = true;
+                //ya know WAT
+                //db.Find(db.Users.Find(User.Identity.GetUserId()).Claims.Last().ClaimType).Confirmed = true;
+                var currUser = db.Reservations.ToList().Find(x=> x.ReservationId == Int32.Parse(tokenCheck.ClaimType));
+                currUser.Confirmed = true;
+                db.SaveChanges();
+               
+            }
+            return View(model);
+        }
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]

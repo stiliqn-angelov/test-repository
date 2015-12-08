@@ -1,0 +1,15 @@
+﻿@model train_tickets_system.Models.CheckConfirmationViewModel
+@{
+    ViewBag.Title = "CheckConfirmation";
+}
+
+<h2>CheckConfirmation</h2>
+@if(Model.Success)
+{
+    @Html.Raw("You have successfully confirmed your ticket.")
+}
+else
+{
+    @Html.Raw("Ticket confirmation failure.")
+}
+

@@ -16,6 +16,7 @@ namespace train_tickets_system.Models
         [ForeignKey("CustomerID")]
         public ApplicationUser User { get; set; }
         public int Seats { get; set; }
+        public bool Confirmed { get; set; } = false;
         public int TripRefId { get; set; }
         [ForeignKey("TripRefId")]
         public virtual Trip Trip { get; set; }

@@ -21,18 +21,14 @@ namespace testing_enviroment_console
     {
         static void Main(string[] args)
         {
-            List<int> list=new List<int>();
-            List<Evo> listEvo = new List<Evo>();
-            listEvo.Add(new Evo(1, "DALI"));
-            listEvo.Add(new Evo(2, "ILI"));
-            listEvo.Add(new Evo(3, "NADALI"));
-            list.Add(1);
-            list.Add(3);
-            list.Add(2);
-            var routefileted = list.FindAll(x => listEvo[x].id == 2);
-            foreach(int kk in routefileted)
+           
+            if("upuK1TrR7smAG5sPA9HmJKuFXs7Hv9+hdC3gLuMbAKb8eiF5BlfkfyvIgJ16G/SbROs7Gqme5a5MtuL8zYbatsf24N+P85L8W7t2AAQ9H+7pGFJII0PpZ7DjyuD0ZctZsTE+JHFWez0kguHb7fXv1nD0LdoaiYw7zZQPrsqpysXU0sUozXQElUjex5rkGQpGvypoIfMKMKGh1tXaLyOO9A==" == "upuK1TrR7smAG5sPA9HmJKuFXs7Hv9 hdC3gLuMbAKb8eiF5BlfkfyvIgJ16G/SbROs7Gqme5a5MtuL8zYbatsf24N P85L8W7t2AAQ9H 7pGFJII0PpZ7DjyuD0ZctZsTE JHFWez0kguHb7fXv1nD0LdoaiYw7zZQPrsqpysXU0sUozXQElUjex5rkGQpGvypoIfMKMKGh1tXaLyOO9A==")
             {
-                Console.WriteLine(kk);
+                Console.WriteLine("6TE TI EBA MAIKATA VE$E");
+            }
+            else
+            {
+                Console.WriteLine("E NE");
             }
            
             Console.Read();

@@ -171,9 +171,13 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="DatabaseMigrations\201512011805269_Initial.cs" />
-    <Compile Include="DatabaseMigrations\201512011805269_Initial.Designer.cs">
-      <DependentUpon>201512011805269_Initial.cs</DependentUpon>
+    <Compile Include="DatabaseMigrations\201512021646408_Initial.cs" />
+    <Compile Include="DatabaseMigrations\201512021646408_Initial.Designer.cs">
+      <DependentUpon>201512021646408_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseMigrations\201512070304051_reservationsAndStuff.cs" />
+    <Compile Include="DatabaseMigrations\201512070304051_reservationsAndStuff.Designer.cs">
+      <DependentUpon>201512070304051_reservationsAndStuff.cs</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -213,7 +217,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -252,6 +258,9 @@
     <Content Include="Views\Admin\Details.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Manage\DeleteReservation.cshtml" />
+    <Content Include="Views\Manage\SendConfirmation.cshtml" />
+    <Content Include="Views\Manage\CheckConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -265,8 +274,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DatabaseMigrations\201512011805269_Initial.resx">
-      <DependentUpon>201512011805269_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="DatabaseMigrations\201512021646408_Initial.resx">
+      <DependentUpon>201512021646408_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseMigrations\201512070304051_reservationsAndStuff.resx">
+      <DependentUpon>201512070304051_reservationsAndStuff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

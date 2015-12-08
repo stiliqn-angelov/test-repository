@@ -13,7 +13,7 @@ namespace train_tickets_system.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201512011805269_Initial"; }
+            get { return "201512021646408_Initial"; }
         }
         
         string IMigrationMetadata.Source
