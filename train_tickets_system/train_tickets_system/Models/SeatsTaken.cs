@@ -12,7 +12,8 @@ namespace train_tickets_system.Models
     {
         [Key, ForeignKey("Trip")]
         public int TripId { get; set; }
-        public int Value { get; set; }
+        public int SeatsEconomical { get; set; }
+        public int SeatsBusiness { get; set; }
         public Trip Trip { get; set; }
 
     }

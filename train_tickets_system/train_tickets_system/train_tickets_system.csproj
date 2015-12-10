@@ -184,6 +184,14 @@
     <Compile Include="DatabaseMigrations\201512080349539_mergeTry.Designer.cs">
       <DependentUpon>201512080349539_mergeTry.cs</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseMigrations\201512080424564_nextONe.cs" />
+    <Compile Include="DatabaseMigrations\201512080424564_nextONe.Designer.cs">
+      <DependentUpon>201512080424564_nextONe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseMigrations\201512101106290_hopeFinal.cs" />
+    <Compile Include="DatabaseMigrations\201512101106290_hopeFinal.Designer.cs">
+      <DependentUpon>201512101106290_hopeFinal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -292,6 +300,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DatabaseMigrations\201512080349539_mergeTry.resx">
       <DependentUpon>201512080349539_mergeTry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseMigrations\201512080424564_nextONe.resx">
+      <DependentUpon>201512080424564_nextONe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseMigrations\201512101106290_hopeFinal.resx">
+      <DependentUpon>201512101106290_hopeFinal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

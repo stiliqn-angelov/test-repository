@@ -105,57 +105,6 @@ namespace train_tickets_system.Migrations
             List<int> possibleRoutes = new List<int>();
             possibleRoutes.Clear();
          
-            for(int dayz=0;dayz<2;dayz++)
-            { 
-                for (int s = 0; s < trainsList.Count; s++)
-                {
-                    possibleRoutes.Clear();
-                    do
-                    {
-                        if (tripsList.FindAll(x => x.TrainRefId == (s + 1)).Count == 0)
-                        {
-                            tripsList.Add(new Models.Trip(1, s + 1, s + 1, timeCounter, timeCounter.AddHours(routesList[s].Value / trainsList[s].AverageSpeed)));
-                            cityBuffer = routesList[s].TargetCity;
-                            timeCounter = timeCounter.AddHours((routesList[s].Value / trainsList[s].AverageSpeed) + 3);
-                        }
-                        else
-                        {
-
-                           
-                            cityFilteredRoutes = routesList.FindAll(x => x.InitialCity == cityBuffer);
-                            foreach (Models.Route filteredRoute in cityFilteredRoutes)
-                            {
-                                possibleRoutes.Add(filteredRoute.RouteId);
-                                routeFilteredTrips = tripsList.FindAll(x => x.RouteRefId == filteredRoute.RouteId);
-                                for (int o = 0; o < routeFilteredTrips.Count; o++)
-                                {
-                                    if ((routeFilteredTrips[o].DepartureTime < (timeCounter.AddHours(filteredRoute.Value/trainsList[s].AverageSpeed))&& timeCounter< routeFilteredTrips[o].ArrivalTime))
-                                    {
-                                        possibleRoutes.Remove(routeFilteredTrips[o].RouteRefId);
-                                    }
-
-                                }
-                            }
-                            if (possibleRoutes.Count != 0)
-                            {
-                                tripsList.Add(new Models.Trip(tripsList.Last().TripId + 1, s + 1, possibleRoutes.First(), timeCounter, timeCounter.AddHours(routesList[possibleRoutes.First() - 1].Value / trainsList[s].AverageSpeed)));
-                                cityBuffer = routesList[possibleRoutes.First() - 1].TargetCity;
-                                timeCounter = timeCounter.AddHours((routesList[possibleRoutes.First() - 1].Value / trainsList[s].AverageSpeed) + 3);
-                                possibleRoutes.Remove(possibleRoutes.First());
-                            }
-                            else
-                            {
-                                timeCounter.AddHours(1);
-                            }
-                        }
-                    }
-                    while (timeCounter.Day == resetter.Day);
-                    timeCounter = resetter;
-                }
-                
-                timeCounter = timeCounter.AddDays(1);
-                resetter = timeCounter;
-        }
             foreach (Models.Trip tripV in tripsList)
             {
                 context.Trips.AddOrUpdate(tripV);

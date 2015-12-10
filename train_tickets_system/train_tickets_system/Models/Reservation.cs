@@ -15,6 +15,9 @@ namespace train_tickets_system.Models
         public string CustomerID { get; set; }
         [ForeignKey("CustomerID")]
         public ApplicationUser User { get; set; }
+        public int PriceId { get; set; }
+        [ForeignKey("PriceId")]
+        public Price Price { get; set; }
         public int Seats { get; set; }
         public bool Confirmed { get; set; } = false;
         public int TripRefId { get; set; }
